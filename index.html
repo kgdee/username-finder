@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Username Finder</title>
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app container">
+      <h2>Username Finder</h2>
+      <label>Filter by First Letters:</label>
+      <input type="text" id="filter1" placeholder="First Letter" />
+      <input type="text" id="filter2" placeholder="Second Letter" />
+      <button onclick="searchUsernames()">Search</button>
+
+      <ul id="usernamesList"></ul>
+    </div>
+  </body>
+</html>
