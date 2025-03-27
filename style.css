@@ -72,14 +72,14 @@ button {
   border-radius: 5px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+.username-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-li {
+.username-list > * {
   background: #f4f4f4;
-  margin: 5px;
   padding: 8px;
   border-radius: 5px;
 }
