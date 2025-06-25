@@ -1,10 +1,15 @@
-const usernameList = document.querySelector(".username-list");
+const nameList = document.querySelector(".name-list");
 const firstInput = document.querySelector(".first-input");
 const secondInput = document.querySelector(".second-input");
 
 let words = "";
 
-async function getWords() {
+document.addEventListener("DOMContentLoaded", async function () {
+  await fetchWords();
+  updateNameList();
+});
+
+async function fetchWords() {
   try {
     const response = await fetch("words.txt");
     words = await response.text();
@@ -13,24 +18,32 @@ async function getWords() {
   }
 }
 
-getWords();
-
-function getRandom() {
+function getRandomWord() {
   const randomWord = words.match(/\b\w+\b/g)?.sort(() => 0.5 - Math.random())[0];
 
   return randomWord;
 }
 
-function getUsername(term) {
-  let regex = term ? new RegExp(`\\b${term}[a-zA-Z]*`, "gi") : /\b[a-zA-Z]+\b/g;
-  let matches = words.match(regex);
-
-  return matches[Math.floor(Math.random() * matches.length)];
+function getWords(term, max = 10) {
+  term = term.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const regex = term ? new RegExp(`\\b${term}[a-zA-Z]*`, "gi") : /\b[a-zA-Z]+\b/g;
+  let matches = words.match(regex) || []
+  matches = shuffle(matches);
+  return matches.slice(0, max);
 }
 
-function getList() {
-  usernameList.innerHTML = "";
-  for (i = 0; i < 10; i++) {
-    usernameList.innerHTML += `<div>${getUsername(firstInput.value) + getUsername(secondInput.value)}</div>`;
+function updateNameList() {
+  const firstWords = getWords(firstInput.value);
+  const secondWords = getWords(secondInput.value);
+  const isUsernamesFound = firstWords.length > 0 && secondWords.length > 0
+
+  nameList.innerHTML = isUsernamesFound ? firstWords.map((word, i) => (secondWords[i] ? `<div class="item">${word+secondWords[i]}</div>` : "")).join("") : "No usernames found"
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
+  return array;
 }

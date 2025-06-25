@@ -11,13 +11,15 @@
   </head>
   <body>
     <div class="app container">
-      <h2>Username Finder</h2>
-      <label>Filter by First Letters:</label>
-      <input class="first-input" type="text" id="filter1" placeholder="First Letter" />
-      <input class="second-input" type="text" id="filter2" placeholder="Second Letter" />
-      <button onclick="getList()">Search</button>
+      <h1 class="title">Username Finder</h1>
+      <div class="word-inputs">
+        <span>Search by words:</span>
+        <input class="first-input" type="text" id="filter1" placeholder="First word" />
+        <input class="second-input" type="text" id="filter2" placeholder="Second word" />
+      </div>
+      <button class="button search-btn" onclick="updateNameList()">Search</button>
 
-      <div class="username-list"></div>
+      <div class="name-list"></div>
     </div>
   </body>
 </html>
